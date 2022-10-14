@@ -1,9 +1,10 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
-engine = create_engine ('postgresql+psycopg2://postgres:example\@localhost/database_name')
+from tovar import Tovar
 
 app = Flask(__name__)
+# engine = create_engine ('postgresql+psycopg2://postgres:example@localhost/MAGaz')
 
 @app.route('/')
 def index():
@@ -21,8 +22,13 @@ def katalog():
 def korzina():
     return render_template('korzina.html')
 
+@app.route('/addTovar')
+def addTovar():
+    return render_template('addTovar.html')
+
 if __name__ == '__main__':
 # debug для ошибок 
     app.run(debug=True) 
+
 
 
