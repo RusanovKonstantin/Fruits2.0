@@ -9,9 +9,13 @@ from sqlalchemy import create_engine
 
 # Base = declarative_base()
 engine = create_engine ('postgresql+psycopg2://postgres:example@localhost/MAGaz')
+print('imported')
+Base = declarative_base()
+# создаем таблицы
 
 
-class Tovar(engine):
+
+class Tovar(Base):
     __tablename__ = "tovar"
     id = Column(Integer, primary_key=True)
     title = Column(String(30))
@@ -21,4 +25,8 @@ class Tovar(engine):
     # )
     def __repr__(self):
         return f"Tovar(id={self.id!r}, title={self.title!r}, cost={self.cost!r})"
-    
+
+
+Base.metadata.create_all(bind=engine)
+
+

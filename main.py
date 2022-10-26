@@ -1,7 +1,16 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
-from tovar import Tovar
+from tovar import Tovar, engine
+from flask import request, redirect
+
+
+from sqlalchemy.orm import sessionmaker
+ 
+SessionLocal = sessionmaker(autoflush=False, bind=engine)
+db = SessionLocal()
+
+    # сохраняем изменения
 
 app = Flask(__name__)
 # engine = create_engine ('postgresql+psycopg2://postgres:example@localhost/MAGaz')
@@ -22,8 +31,17 @@ def katalog():
 def korzina():
     return render_template('korzina.html')
 
-@app.route('/addTovar')
+@app.route('/addTovar', methods=['GET', 'POST'])
 def addTovar():
+    if request.method == 'POST':
+        title = request.form.get("title")
+        cost = request.form.get("cost", default=0, type=float)
+        tovar=Tovar()
+        tovar.title=title
+        tovar.cost=cost
+        db.add(tovar)     # добавляем в бд
+        db.commit() 
+        return redirect("/korzina")
     return render_template('addTovar.html')
 
 if __name__ == '__main__':
