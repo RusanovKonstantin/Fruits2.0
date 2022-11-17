@@ -6,6 +6,7 @@ from sqlalchemy import String
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
 
 # Base = declarative_base()
 engine = create_engine ('postgresql+psycopg2://postgres:example@localhost/MAGaz')
@@ -25,6 +26,7 @@ class Tovar(Base):
     # )
     def __repr__(self):
         return f"Tovar(id={self.id!r}, title={self.title!r}, cost={self.cost!r})"
+    
 
 
 Base.metadata.create_all(bind=engine)

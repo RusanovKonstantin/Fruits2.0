@@ -23,9 +23,12 @@ def index():
 def about():
     return render_template('about.html')
 
-@app.route('/katalog')
+@app.route('/katalog',methods=['GET'] )
 def katalog():
-    return render_template('katalog.html')
+    products = db.query(Tovar.title, Tovar.cost).all()
+    print(products)
+    return render_template('katalog.html', products = products)
+    
 
 @app.route('/korzina')
 def korzina():
