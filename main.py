@@ -44,7 +44,7 @@ def addTovar():
         tovar.cost=cost
         db.add(tovar)     # добавляем в бд
         db.commit() 
-        return redirect("/korzina")
+        return redirect("/addTovar")
     return render_template('addTovar.html')
 
 if __name__ == '__main__':
