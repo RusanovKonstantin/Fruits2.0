@@ -6,7 +6,7 @@
 
 {% block body %}
 <div class="container">
-
+    <h3>Добавление</h3>
     <form action="" method="POST">
         <label>Title</label>
         <input type="string" name= "title" placeholder="Введите название столбца...">
@@ -14,5 +14,30 @@
         <input type="float" name="cost" placeholder="Введите цену...">
         <button type="submit" >Add</button>
      </form>
+</div>
+<div class="container">
+<h3>Удаление</h3>
+    <form action="" method="POST">
+        <label>ID</label>
+        <input type="number" name= "ID" placeholder="Введите ID товара...">
+        <button type="submit" >Delete</button>
+     </form>
+</div>
+<h3>Редактировать</h3>
+    <form action="" method="POST">
+        <label>ID</label>
+        <input type="number" name= "ID_edit" placeholder="Введите ID товара...">
+        <label>Title</label>
+        <input type="string" name= "title_edit" placeholder="Введите название...">
+        <label>Cost</label>
+        <input type="float" name="cost_edit" placeholder="Введите цену...">
+        <button type="submit" >Edit</button>
+     </form>
+<div class="container">
+    <ol>
+        {% for product in products %}  
+         <li>{{product.id}} {{product.title}} {{product.cost}} </li>
+        {% endfor %}
+    </ol>
 </div>
 {% endblock %}
